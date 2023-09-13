@@ -3,14 +3,14 @@ import './NewInvestForm.css'
 import ResetButton from "./ResetButton.jsx";
 import CalculateButton from "./CalculateButton.jsx";
 const NewInvestForm = (props) => {
-    const [enteredActualSavings, setEnteredActualSavings] = useState(0)
-    const [enteredYearlySavings, setEnteredYearlySavings] = useState(0)
-    const [enteredExceptedInterest, setEnteredExceptedInterest] = useState(0)
-    const [enteredInvestmentDuration, setEnteredInvestmentDuration] = useState(0)
+    const [enteredActualSavings, setEnteredActualSavings] = useState('')
+    const [enteredYearlySavings, setEnteredYearlySavings] = useState('')
+    const [enteredExceptedInterest, setEnteredExceptedInterest] = useState('')
+    const [enteredInvestmentDuration, setEnteredInvestmentDuration] = useState('')
     const inputChangeHandler = ((identifier, value) => {
         if (identifier === 'actual') {
             setEnteredActualSavings(value)
-            console.log(+enteredActualSavings)
+
         } else if (identifier == "yearly") {
             setEnteredYearlySavings(value)
         }else if (identifier == "interest") {
@@ -23,18 +23,16 @@ const NewInvestForm = (props) => {
 
     const submitHandler = (event) => {
         event.preventDefault();
+
         const investData = {
-            currentSavings: +enteredActualSavings,
-            yearlySavings: +enteredYearlySavings,
-            interest: +enteredExceptedInterest,
-            duration: +enteredInvestmentDuration
+            currentSavings: Number(enteredActualSavings),
+            yearlySavings: Number(enteredYearlySavings),
+            interest: Number(enteredExceptedInterest),
+            duration: Number(enteredInvestmentDuration)
         }
 
         props.onAddNewUserInvest(investData)
-        setEnteredActualSavings(0)
-        setEnteredYearlySavings(0)
-        setEnteredExceptedInterest(0)
-        setEnteredInvestmentDuration(0)
+
     }
 
     return <div className="new-invest">

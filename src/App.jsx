@@ -14,16 +14,18 @@ function App() {
     const addUserInvest = newUserInvest => {
 
         setUserInvest(newUserInvest)
-        setInvestData(calculateYearlyResults(userInvest))
-        console.log(userInvest)
+        const result = calculateYearlyResults(userInvest)
+        setInvestData(result)
         console.log(investData)
+
+
     }
 
     const calculateYearlyResults = (enteredData) => {
-        const yearlyData = []
         console.log(enteredData)
+        const yearlyData = []
         for (let i = 0; i < enteredData.duration; i++) {
-            const yearlyInterest = enteredData.currentSavings * enteredData.interest;
+            const yearlyInterest = (enteredData.currentSavings * enteredData.interest)/100;
             enteredData.currentSavings += yearlyInterest + enteredData.yearlySavings;
             yearlyData.push({
                 // feel free to change the shape of the data pushed to the array!
@@ -32,15 +34,15 @@ function App() {
                 savingsEndOfYear: enteredData.currentSavings,
                 yearlyContribution: enteredData.yearlySavings,
             });
-
-            return yearlyData;
         }
+            return yearlyData;
+
     }
 
         return (
             <>
                 <Header/>
-               <NewInvestForm onAddNewUserInvest={addUserInvest}/>
+                <NewInvestForm onAddNewUserInvest={addUserInvest}/>
                 <TableResult newInvest={userInvest}/>
             </>
 
